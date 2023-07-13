@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/meshop/lib-meshop/cache/cache.iml" filepath="$PROJECT_DIR$/meshop/lib-meshop/cache/cache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/lib-meshop/core/core.iml" filepath="$PROJECT_DIR$/meshop/lib-meshop/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/lib-meshop/database/database.iml" filepath="$PROJECT_DIR$/meshop/lib-meshop/database/database.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/gateway/gateway.iml" filepath="$PROJECT_DIR$/meshop/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/lib-meshop/lib-meshop.iml" filepath="$PROJECT_DIR$/meshop/lib-meshop/lib-meshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/meshop.iml" filepath="$PROJECT_DIR$/meshop/meshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/meshop-cart/meshop-cart.iml" filepath="$PROJECT_DIR$/meshop/meshop-cart/meshop-cart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/meshop-comments/meshop-comments.iml" filepath="$PROJECT_DIR$/meshop/meshop-comments/meshop-comments.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/meshop-orders/meshop-orders.iml" filepath="$PROJECT_DIR$/meshop/meshop-orders/meshop-orders.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/meshop-products/meshop-products.iml" filepath="$PROJECT_DIR$/meshop/meshop-products/meshop-products.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/meshop-upload/meshop-upload.iml" filepath="$PROJECT_DIR$/meshop/meshop-upload/meshop-upload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/meshop-user/meshop-user.iml" filepath="$PROJECT_DIR$/meshop/meshop-user/meshop-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meshop/lib-meshop/spring/spring.iml" filepath="$PROJECT_DIR$/meshop/lib-meshop/spring/spring.iml" />
+    </modules>
+  </component>
+</project>

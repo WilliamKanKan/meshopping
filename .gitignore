@@ -1,0 +1,7 @@
+# Project exclude paths
+/meshop/gateway/target/
+/meshop/meshop-cart/target/
+/meshop/meshop-comments/target/
+/meshop/meshop-orders/target/
+/meshop/meshop-upload/target/
+/meshop/target/

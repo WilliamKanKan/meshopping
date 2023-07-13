@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/meshop/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/lib-meshop/cache/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/lib-meshop/core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/lib-meshop/database/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-cart/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-cart/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-comments/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-comments/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-orders/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-orders/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-products/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-products/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-upload/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-upload/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meshop/meshop-user/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
