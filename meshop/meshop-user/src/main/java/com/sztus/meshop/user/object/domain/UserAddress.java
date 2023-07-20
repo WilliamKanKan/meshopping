@@ -13,6 +13,8 @@ public class UserAddress implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
     private Long userId;
+    private String username;
+    private String telephone;
     private String address;
     private Integer zipCode;
     private Integer status;

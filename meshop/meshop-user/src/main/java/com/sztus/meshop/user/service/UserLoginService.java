@@ -46,27 +46,7 @@ public class UserLoginService {
                 if (!account.getPassword().equals(codePassword)) {
                     return JSON.parseObject(AjaxResult.failure("Password is not matched"));
                 } else {
-                    String accountKey = simpleRedisRepository.generateKey(RedisKeyType.ACCOUNT, account.getAccessToken());
-                    String privilegeKey = simpleRedisRepository.generateKey(RedisKeyType.AUTHORIZATION, account.getAccessToken());
-                    accountDTO.setAccessToken(account.getAccessToken());
-                    accountDTO.setNickname(existingUser.getNickname());
-                    accountDTO.setAvatarUrl(existingUser.getAvatarUrl());
-                    accountDTO.setPosition(existingUser.getPosition());
-                    accountDTO.setOpenId(existingUser.getOpenId());
-                    MPJLambdaWrapper<User> mpjLambdaWrapper = new MPJLambdaWrapper<User>()
-                            .select(Resource::getCode)
-                            .select(RolePrivilege::getPrivilege)
-                            .select(Resource::getUrl)
-                            .leftJoin(Role.class, Role::getId, User::getPosition)
-                            .leftJoin(RolePrivilege.class, RolePrivilege::getRoleId, Role::getId)
-                            .leftJoin(Resource.class, Resource::getId, RolePrivilege::getResourceId).eq(User::getId, existingUser.getId());
-                    List<PrivilegeDTO> privileges = userMapper.selectJoinList(PrivilegeDTO.class, mpjLambdaWrapper);
-                    simpleRedisRepository.set(privilegeKey, JSON.toJSONString(privileges), NumberCode.EXPIRED_TIME);
-                    simpleRedisRepository.set(accountKey, JSON.toJSONString(accountDTO), NumberCode.EXPIRED_TIME);
-                    account.setExpiredAt(System.currentTimeMillis() + NumberCode.EXPIRED_TIME * 1000);
-                    LambdaUpdateWrapper<Account> accountLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
-                    accountLambdaUpdateWrapper.eq(Account::getOpenId, account.getOpenId());
-                    accountMapper.update(account, accountLambdaUpdateWrapper);
+                    loginSuccess(account, accountDTO, existingUser);
                     return JSONObject.parseObject(AjaxResult.success(account.getAccessToken(), CodeEnum.SUCCESS.getText()));
                 }
             } else {
@@ -76,4 +56,55 @@ public class UserLoginService {
             return JSON.parseObject(AjaxResult.failure("User not exist"));
         }
     }
+
+    public JSONObject loginByTelephone(String telephone, String verifyCode) {
+        AccountDTO accountDTO = new AccountDTO();
+        LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        userLambdaQueryWrapper.eq(User::getTelephone, telephone);
+        User existingUser = userMapper.selectOne(userLambdaQueryWrapper);
+        if (existingUser != null) {
+            LambdaQueryWrapper<Account> accountLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            accountLambdaQueryWrapper.eq(Account::getOpenId, existingUser.getOpenId());
+            Account account = accountMapper.selectOne(accountLambdaQueryWrapper);
+            if (account != null) {
+                String verifyCodeKey = simpleRedisRepository.generateKey(RedisKeyType.VERIFY_CODE, telephone);
+                String code = simpleRedisRepository.get(verifyCodeKey);
+                if (!verifyCode.equals(code)) {
+                    return JSON.parseObject(AjaxResult.failure("Code is incorrect or expired"));
+                } else {
+                    loginSuccess(account, accountDTO, existingUser);
+                    return JSONObject.parseObject(AjaxResult.success(account.getAccessToken(), CodeEnum.SUCCESS.getText()));
+                }
+            } else {
+                return JSON.parseObject(AjaxResult.failure("Account not found"));
+            }
+        } else {
+            return JSON.parseObject(AjaxResult.failure("User not exist"));
+        }
+    }
+
+    public void loginSuccess(Account account, AccountDTO accountDTO, User existingUser) {
+        String accountKey = simpleRedisRepository.generateKey(RedisKeyType.ACCOUNT, account.getAccessToken());
+        String privilegeKey = simpleRedisRepository.generateKey(RedisKeyType.AUTHORIZATION, account.getAccessToken());
+        accountDTO.setAccessToken(account.getAccessToken());
+        accountDTO.setNickname(existingUser.getNickname());
+        accountDTO.setAvatarUrl(existingUser.getAvatarUrl());
+        accountDTO.setPosition(existingUser.getPosition());
+        accountDTO.setOpenId(existingUser.getOpenId());
+        MPJLambdaWrapper<User> mpjLambdaWrapper = new MPJLambdaWrapper<User>()
+                .select(Resource::getCode)
+                .select(RolePrivilege::getPrivilege)
+                .select(Resource::getUrl)
+                .leftJoin(Role.class, Role::getId, User::getPosition)
+                .leftJoin(RolePrivilege.class, RolePrivilege::getRoleId, Role::getId)
+                .leftJoin(Resource.class, Resource::getId, RolePrivilege::getResourceId).eq(User::getId, existingUser.getId());
+        List<PrivilegeDTO> privileges = userMapper.selectJoinList(PrivilegeDTO.class, mpjLambdaWrapper);
+        simpleRedisRepository.set(privilegeKey, JSON.toJSONString(privileges), NumberCode.EXPIRED_TIME);
+        simpleRedisRepository.set(accountKey, JSON.toJSONString(accountDTO), NumberCode.EXPIRED_TIME);
+        account.setExpiredAt(System.currentTimeMillis() + NumberCode.EXPIRED_TIME * 1000);
+        LambdaUpdateWrapper<Account> accountLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
+        accountLambdaUpdateWrapper.eq(Account::getOpenId, account.getOpenId());
+        accountMapper.update(account, accountLambdaUpdateWrapper);
+    }
+
 }

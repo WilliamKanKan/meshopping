@@ -7,6 +7,10 @@ spring:
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
+  mail:
+    host: smtp.qq.com
+    username: 554771003@qq.com
+    password: jcegvvqipbuibbib
   datasource:
     dynamic:
       primary: writer

@@ -3,7 +3,6 @@ package com.sztus.meshop.user.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.sztus.meshop.lib.core.enumerate.CodeEnum;
 import com.sztus.meshop.lib.core.type.AjaxResult;
 import com.sztus.meshop.lib.core.type.NumberCode;
 import com.sztus.meshop.lib.core.util.CreatePwUtil;
@@ -96,9 +95,7 @@ public class UserRegisterService {
             user.setUpdatedAt(System.currentTimeMillis());
             accountMapper.insert(account);
             userMapper.insert(user);
-            JSONObject response = JSONObject.parseObject(AjaxResult.success(CodeEnum.SUCCESS.getText()));
-            response.remove("data");
-            return response;
+            return JSONObject.parseObject(AjaxResult.success());
         }
     }
 }
