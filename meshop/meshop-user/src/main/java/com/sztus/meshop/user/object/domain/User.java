@@ -25,7 +25,7 @@ public class User implements Serializable {
     private String telephone;
     private Long birthday;
     private String nickname;
-    private String gender;
+    private Long gender;
     private String avatarUrl;
     private Long createdAt;
     private Long updatedAt;

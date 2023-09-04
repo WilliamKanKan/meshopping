@@ -9,6 +9,7 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountDTO implements Serializable {
     private Integer position;
+    private Long UserId;
     private String openId;
     private String username;
     private String nickname;

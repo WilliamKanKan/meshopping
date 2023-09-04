@@ -42,3 +42,4 @@ spring:
 logging:
   level:
     com.sztus.meshop.user.repository.mapper.: debug
+

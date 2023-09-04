@@ -6,8 +6,11 @@ import com.sztus.meshop.lib.cache.core.SimpleRedisRepository;
 import com.sztus.meshop.lib.core.enumerate.CodeEnum;
 import com.sztus.meshop.lib.core.type.AjaxResult;
 import com.sztus.meshop.lib.core.type.RedisKeyType;
+import com.sztus.meshop.user.object.response.PrivilegeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GetUserInfoService {
@@ -34,7 +37,8 @@ public class GetUserInfoService {
         if(authorizationStr != null){
             // 用于去掉当从redis中取数据时带的斜杆 /
 //            JSONObject jsonObjectAuthorization = (JSONObject) JSON.parse(authorizationStr);
-            return JSONObject.parseObject(AjaxResult.success(authorizationStr, CodeEnum.SUCCESS.getText()));
+            List<PrivilegeDTO> privilegeDTOS = JSON.parseArray(authorizationStr, PrivilegeDTO.class);
+            return JSONObject.parseObject(AjaxResult.success(privilegeDTOS, CodeEnum.SUCCESS.getText()));
         }
         else {
             return JSON.parseObject(AjaxResult.failure("Token not found"));

@@ -32,10 +32,10 @@ public class UserLoginService {
     @Autowired
     private SimpleRedisRepository simpleRedisRepository;
 
-    public JSONObject loginByEmail(User user) {
+    public JSONObject loginByUsername(User user) {
         AccountDTO accountDTO = new AccountDTO();
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        userLambdaQueryWrapper.eq(User::getEmail, user.getEmail());
+        userLambdaQueryWrapper.eq(User::getUsername, user.getUsername());
         User existingUser = userMapper.selectOne(userLambdaQueryWrapper);
         if (existingUser != null) {
             LambdaQueryWrapper<Account> accountLambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -91,6 +91,7 @@ public class UserLoginService {
         accountDTO.setAvatarUrl(existingUser.getAvatarUrl());
         accountDTO.setPosition(existingUser.getPosition());
         accountDTO.setOpenId(existingUser.getOpenId());
+        accountDTO.setUserId(existingUser.getId());
         MPJLambdaWrapper<User> mpjLambdaWrapper = new MPJLambdaWrapper<User>()
                 .select(Resource::getCode)
                 .select(RolePrivilege::getPrivilege)

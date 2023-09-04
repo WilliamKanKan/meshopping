@@ -84,11 +84,6 @@ public class UserRegisterService {
             account.setRoleId(NumberCode.USER);
             account.setOpenId(uuid);
             account.setAccessToken(accessToken);
-            if(user.getGender().equals("男")){
-                user.setGender(NumberCode.BOY);
-            }else {
-                user.setGender(NumberCode.GIRL);
-            }
             user.setOpenId(uuid);
             user.setPosition(NumberCode.USER);
             user.setCreatedAt(System.currentTimeMillis());

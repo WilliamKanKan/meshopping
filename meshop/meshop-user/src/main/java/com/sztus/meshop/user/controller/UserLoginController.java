@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @Slf4j
 @RestController
 @RequestMapping("/user")
@@ -16,7 +15,7 @@ public class UserLoginController {
     private UserLoginService userLoginService;
     @PostMapping(value = "/login")
     public JSONObject login(@RequestBody User user){
-        return userLoginService.loginByEmail(user);
+        return userLoginService.loginByUsername(user);
     }
     @PostMapping(value = "/login-phone")
     public JSONObject loginByPhone(@RequestBody JSONObject object){

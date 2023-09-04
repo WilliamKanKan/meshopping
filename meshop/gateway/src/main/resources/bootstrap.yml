@@ -13,6 +13,34 @@ spring:
         name: ${szt.nacos.application-name}
         namespace: ${szt.nacos.namespace}
         group: ${szt.nacos.group}
+    gateway:
+      routes:
+      - id: user-service
+        uri: lb://meshop-user
+        predicates:
+           - Path=/user/**,/admin/**,/role/**
+      - id: products-service
+        uri: lb://meshop-products
+        predicates:
+           - Path=/products/**,/category/**
+      - id: upload-service
+        uri: lb://meshop-upload
+        predicates:
+           - Path=/upload/**
+      globalcors:
+        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: # 允许哪些网站的跨域请求
+              - "http://localhost:5173"
+            allowedMethods: # 允许的跨域ajax的请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*" # 允许在请求中携带的头信息
+            allowCredentials: true # 是否允许携带cookie
 ---
 spring:
   config:
